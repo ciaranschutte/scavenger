@@ -1,0 +1,8 @@
+<h1>Teams</h1>
+{{teams}}
+<div id="teams" ng-repeat="team in teams">
+	<div id="name">{{team.name}}</div>
+	<div id="created">{{team.created}}</div>
+	<div id="members" ng-repeat="member in team.members">{{member}}</div>
+	<div id="size">{{team.size}}</div>
+</div>

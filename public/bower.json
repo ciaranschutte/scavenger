@@ -1,0 +1,25 @@
+{
+  "name": "scavenger",
+  "version": "0.0.1",
+  "description": "Scavenger hunt app",
+  "main": "public/app.js",
+  "authors": [
+    "Ciaran Schutte"
+  ],
+  "license": "na",
+  "homepage": "na",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.5",
+    "angular-leaflet-directive": "~0.8.8",
+    "angular-route": "~1.4.5",
+    "angularfire": "~1.1.2",
+    "firebase": "~2.2.9"
+  }
+}

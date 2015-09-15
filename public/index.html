@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css">
+		<script src="/bower_components/angular/angular.js"></script>
+		<script src="/bower_components/angular-route/angular-route.min.js"></script>
+		<script src="/bower_components/angular-simple-logger/dist/index.js"></script>
+		<script src="/bower_components/leaflet/dist/leaflet.js"></script>
+		<script src="/bower_components/firebase/firebase.js"></script>
+		<script src="/bower_components/angularfire/dist/angularfire.min.js"></script>
+		<link href="/bower_components/angular-xeditable/dist/css/xeditable.css" rel="stylesheet">
+		<script src="/bower_components/angular-xeditable/dist/js/xeditable.js"></script>
+		<script src="/config.js"></script>
+		<script src="/app.js"></script>
+	</head>
+
+
+	<body ng-app="ScavengerApp">
+	<div id="sidebar">
+		<a href="#home">Home</a>
+		<a href="#event">Events</a>
+		<a href="#map">Map</a>
+		<a href="#tasks">Tasks</a>
+		<a href="#teams">Teams</a>
+	</div>
+
+	<div ng-view></div>
+
+	<!-- Controllers -->
+	<script src="/home/HomeController.js"></script>
+	<script src="/map/MapController.js"></script>
+	<script src="/event/EventController.js"></script>
+	<script src="/task/TasksController.js"></script>
+	<script src="/team/TeamsController.js"></script>
+	
+
+
+	<!-- Directives -->
+	<script src="/bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.min.js"></script>
+
+	</body>
+
+
+</html>

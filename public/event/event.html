@@ -1,0 +1,10 @@
+<h1>Event</h1>
+<form>
+<input name="title" placeholder="title" ng-model="event.title"/>
+<input name="date" placeholder="date" ng-model="event.date"/>
+<input name="description" placeholder="description" ng-model="event.description"/>
+<input name="team-size" placeholder="Team Size" ng-model="event.teamSize"/>
+<input type="button" ng-click="save(event)" value="Save"/>
+</form>
+
+{{event}}
