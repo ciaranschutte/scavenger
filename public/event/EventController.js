@@ -1,4 +1,4 @@
-app.controller('EventController', ['$scope', 'ENV' function($scope, ENV){
+app.controller('EventController', ['$scope', 'ENV', function($scope, ENV){
 
 
 	$scope.save = function(event) {

@@ -1,8 +1,16 @@
 <h1>Teams</h1>
 {{teams}}
-<div id="teams" ng-repeat="team in teams">
-	<div id="name">{{team.name}}</div>
-	<div id="created">{{team.created}}</div>
-	<div id="members" ng-repeat="member in team.members">{{member}}</div>
-	<div id="size">{{team.size}}</div>
-</div>
+
+
+<table st-table="teams">
+	<thead><tr><th>Name</th><th>Created</th><th>Members</th><th>Size</th></tr></thead>
+	<tbody>
+		<tr ng-repeat="team in teams">
+			<td>{{team.hasOwnProperty('id')}}</td>
+			<td>{{team.created}}</td>
+			<td>{{team.members}}</td>
+			<td>{{team.size}}</td>
+			<td><button ng-click="">X</button></td>
+		</tr>
+	</tbody>
+</table>

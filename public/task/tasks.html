@@ -1,8 +1,19 @@
 <h1>Tasks</h1>
 {{tasks}}
-<div id="tasks" ng-repeat="task in tasks">
-	<div id="detail">{{task.detail}}</div>
-</div>
+
+
+<table st-table="tasks">
+	
+	<thead><tr><th>Order</th><th>Detail</th><th>Attachments</th></tr></tr></thead>
+	<tbody>
+		<tr ng-repeat="task in tasks">
+			<td>{{task.order}}</td>
+			<td>{{task.detail}}</td>
+			<td>{{task.attachments}}</td>
+		</tr>
+	</tbody>
+</table>
+
 
 <div>
 	
@@ -11,6 +22,6 @@
 	<input name="geo_pos" placeholder="geo_pos" ng-model="task.geo_pos"/>
 	<input name="attachements" placeholder="attachments" ng-model="task.attachments"/>
 	<button ng-click="save(task)">Save</button>
-	<button ng-click="delete()" value="Save">X</button>
+	<button ng-click="delete()">X</button>
 
 </div>

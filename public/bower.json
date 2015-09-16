@@ -20,6 +20,8 @@
     "angular-leaflet-directive": "~0.8.8",
     "angular-route": "~1.4.5",
     "angularfire": "~1.1.2",
-    "firebase": "~2.2.9"
+    "bootstrap-table": "~1.8.1",
+    "firebase": "~2.2.9",
+    "leaflet-draw": "~0.2.4"
   }
 }

@@ -1,4 +1,4 @@
-var app = angular.module('ScavengerApp', ['ngRoute', 'leaflet-directive', 'firebase', 'xeditable', 'config']);
+var app = angular.module('ScavengerApp', ['ngRoute', 'leaflet-directive', 'firebase', 'smart-table','xeditable', 'config']);
 
 app.config(function($routeProvider){
 
