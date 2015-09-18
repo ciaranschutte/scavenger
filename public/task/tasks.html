@@ -4,10 +4,13 @@
 
 <table st-table="tasks">
 	
-	<thead><tr><th>Order</th><th>Detail</th><th>Attachments</th></tr></tr></thead>
+	<thead>
+		<tr>
+			<th>Detail</th>
+			<th>Attachments</th>
+		</tr></thead>
 	<tbody>
 		<tr ng-repeat="task in tasks">
-			<td>{{task.order}}</td>
 			<td>{{task.detail}}</td>
 			<td>{{task.attachments}}</td>
 		</tr>
@@ -17,10 +20,8 @@
 
 <div>
 	
-	<input name="order" placeholder="order" ng-model="task.order"/>
 	<input name="detail" placeholder="detail" ng-model="task.detail"/>
-	<input name="geo_pos" placeholder="geo_pos" ng-model="task.geo_pos"/>
-	<input name="attachements" placeholder="attachments" ng-model="task.attachments"/>
+	<input name="attachments" placeholder="attachments" ng-model="task.attachments"/>
 	<button ng-click="save(task)">Save</button>
 	<button ng-click="delete()">X</button>
 

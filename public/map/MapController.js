@@ -1,36 +1,41 @@
 app.controller('MapController', ['$scope','leafletData', '$firebaseArray', 'ENV', function($scope,leafletData, $firebaseArray , ENV){
+	
 	var mapID = "raulduke.ne6nhdkl";
 	var accessToken = ENV.MAPBOX_ACCESS_TOKEN;
 	var app_id = ENV.FIREBASE_APP_ID;
+
 	var ref = new Firebase("https://"+app_id+".firebaseio.com/tasks");
-	
+	var georef = new Firebase("https://"+app_id+".firebaseio.com/markers");
 	$scope.tasks = $firebaseArray(ref);
+	$scope.fmarkers = $firebaseArray(georef);
  	
- 	$scope.markers = new Array();
+	$scope.markers = [];
  	$scope.markerCount = 1;
+	$scope.markerSelect = []; 
 
- 	$scope.tasks.$loaded().then(function(tasks){
- 		tasks.forEach(function(task) {
- 			//console.log(task);
-
- 			$scope.markers.push({
-                lat: task.geo.lat,
-                lng: task.geo.lng,
- 				draggable: true,
- 				focus: true,
-                label: {
-            	    message: ""+$scope.markerCount++,
-                    options: {
-                        noHide: true
-                    }
-                }
-           	});
+ 	$scope.fmarkers.$loaded().then(function(fmarkers){
+ 		//console.log("markers",fmarkers);
+ 		fmarkers.forEach(function(m){
+ 			//console.log(m);
+ 			$scope.markers.push(m);
+ 			$scope.markerSelect.push({
+ 				value:m.$id, 
+ 				text:m.label.message
+ 			});
  		});
+
  	});
+
+ 	$scope.showMarkerSelect = function($index){
+ 		var key = $scope.tasks[$index].marker;
+ 		//console.log("key", key);
+ 		markerNum = $scope.fmarkers.$getRecord(key);
+ 		//console.log("markerNum", markerNum);
+ 		return markerNum.label.message;
+ 	};
 
 	$scope.$on('leafletDirectiveMarker.dragend', function(event, args){
 		//console.log(args);
-
         $scope.markers[args.modelName].lat = args.model.lat;
         $scope.markers[args.modelName].lng = args.model.lng;
     });
@@ -61,17 +66,10 @@ app.controller('MapController', ['$scope','leafletData', '$firebaseArray', 'ENV'
             }
 	});
 
-/*
- 
-                $scope.taskpoints.push({
-                	value:$scope.markerCount,
-                	text:""+$scope.markerCount,
-                });
-            });
-*/		
-		leafletData.getMap().then(function(map){
-			map.setView([51.505, -0.09], 13);
-		})
+	
+	leafletData.getMap().then(function(map){
+		map.setView([51.505, -0.09], 13);
+	});
 
 
 

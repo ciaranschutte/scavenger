@@ -1,18 +1,22 @@
 <h1>Map</h1>
 {{markers}}
-{{tasks}}
 <table st-table="tasks">
 	
 	<thead>
-		<tr>
+		<tr>			
+			<th>Task</th>
 			<th>Marker</th>
-			<th>Detail</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr ng-repeat="task in tasks">
-			<td>{{task.marker}}</td>
 			<td>{{task.detail}}</td>
+
+			<td>
+				<a href="#" editable-select="task.marker" e-ng-options="m.value as m.text for m in markerSelect">
+					{{showMarkerSelect($index)}}
+				</a>
+			</td>
 		</tr>
 	</tbody>
 </table>
