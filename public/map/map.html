@@ -1,2 +1,20 @@
 <h1>Map</h1>
-<leaflet center="center" layers="layers" height="480px" width="640px"></leaflet>
+{{markers}}
+{{tasks}}
+<table st-table="tasks">
+	
+	<thead>
+		<tr>
+			<th>Marker</th>
+			<th>Detail</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="task in tasks">
+			<td>{{task.marker}}</td>
+			<td>{{task.detail}}</td>
+		</tr>
+	</tbody>
+</table>
+
+<leaflet center="center" markers="markers" layers="layers" height="480px" width="640px"></leaflet>

@@ -1,62 +1,78 @@
-app.controller('MapController', ['$scope','leafletData','ENV', function($scope, leafletData, ENV){
+app.controller('MapController', ['$scope','leafletData', '$firebaseArray', 'ENV', function($scope,leafletData, $firebaseArray , ENV){
 	var mapID = "raulduke.ne6nhdkl";
 	var accessToken = ENV.MAPBOX_ACCESS_TOKEN;
+	var app_id = ENV.FIREBASE_APP_ID;
+	var ref = new Firebase("https://"+app_id+".firebaseio.com/tasks");
 	
+	$scope.tasks = $firebaseArray(ref);
+ 	
+ 	$scope.markers = new Array();
+ 	$scope.markerCount = 1;
+
+ 	$scope.tasks.$loaded().then(function(tasks){
+ 		tasks.forEach(function(task) {
+ 			//console.log(task);
+
+ 			$scope.markers.push({
+                lat: task.geo.lat,
+                lng: task.geo.lng,
+ 				draggable: true,
+ 				focus: true,
+                label: {
+            	    message: ""+$scope.markerCount++,
+                    options: {
+                        noHide: true
+                    }
+                }
+           	});
+ 		});
+ 	});
+
+	$scope.$on('leafletDirectiveMarker.dragend', function(event, args){
+		//console.log(args);
+
+        $scope.markers[args.modelName].lat = args.model.lat;
+        $scope.markers[args.modelName].lng = args.model.lng;
+    });
 
 	angular.extend($scope, {
-	    
 	    	center: {
 	    		lat: 53.39,
 	    		lng: -6.19,
 	    		zoom: 8
 	    	},
-
-
-                layers: {
-                	baselayers:{
-                		mapbox: {
-                			name: "Scavenger Map",
-                            url: "https://a.tiles.mapbox.com/v4/"+mapID+"/{z}/{x}/{y}.png?access_token="+accessToken,
-                            type: 'xyz',
-
-                     	},
-	                	overlay: {
+			layers: {
+                baselayers:{
+                	mapbox: {
+                		name: "Scavenger Map",
+                        url: "https://a.tiles.mapbox.com/v4/"+mapID+"/{z}/{x}/{y}.png?access_token="+accessToken,
+                        type: 'xyz',
+                    },
+	                overlay: {
 	                       	
-	                            name: 'overlay',
-	                            type: 'group',
-	                            visible: true,
-	                            layerParams: {
-	                                showOnSelector: false
-                            	}
-                        	
-                    	}
-                	}
-                },
-
-
+	                    name: 'overlay',
+	                    type: 'group',
+	                    visible: true,
+	                    layerParams: {
+	                        showOnSelector: false
+                       	}
+                    }
+                }
+            }
 	});
 
-	leafletData.getMap().then(function(map){
+/*
+ 
+                $scope.taskpoints.push({
+                	value:$scope.markerCount,
+                	text:""+$scope.markerCount,
+                });
+            });
+*/		
+		leafletData.getMap().then(function(map){
+			map.setView([51.505, -0.09], 13);
+		})
 
-		map.setView([51.505, -0.09], 13);
-		leafletData.getLayers().then(function(baselayers) {
-			var drawnItems = new L.FeatureGroup();
-			map.addLayer(drawnItems);
 
-			// Initialise the draw control and pass it the FeatureGroup of editable layers
-			var drawControl = new L.Control.Draw({
-				draw: {
-					rectangle: false,
-					polyline: false,
-					marker: false,
-					polygon: false
-				},
-		
-			});
-			map.addControl(drawControl);
-    	});
-               
-
-	});
 
 }]);
